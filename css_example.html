@@ -7,48 +7,31 @@
     </head>
     <body>
         <style>
-            img{
-                padding-left: 275px;
+            @keyframes shift {
+                0%  {color: red;}
+                9%  {color: rgb(126, 0, 0);}
+                18% {color: black;}
+                27% {color: rgb(0, 49, 0);}
+                36% {color: green;}
+                45% {color: rgb(0, 49, 0);}
+                54% {color: black;}
+                63% {color: rgb(0, 0, 117);}
+                72% {color: blue;}
+                81% {color: rgb(0, 0, 117);}
+                90% {color: black;}
+                100%{color: rgb(126, 0, 0);}
             }
-            em{
-                scale: 115%;
-                color:coral;
-                background: chartreuse;
+            .damage{
+                color: red;
             }
-            strong{
-                scale: 120%;
-                color: blueviolet;
-                background: cadetblue;
+            .heal{
+                color: green;
             }
-            h1 {
-                width: 120%;
-                margin: 40px;
-                padding: 200px;
-                margin-left: -10px;
-                color: blue;
-                background: bisque;
-            }
-            p {
-                margin: 0px;
-                padding: 50px;
-                padding-left: 270px;
-                scale: 140%;
-                color: antiquewhite;
-                background: turquoise;
-            }
-            * {
-                background-color:firebrick
+            .interest{
+                animation: shift infinite 3s;
             }
         </style>
-        <h1><strong>White Whale</strong></h1>
-        <p><strong>Look out to sea, and gaze out yonder</strong></p>
-        <p><em>A wild beast, you wait and ponder</em></p>
-        <p><strong>He taunts and teases, you sniffle and sneezes</strong></p>
-        <p><em>The whale is at your feet.</em></p><br>
-        <p><strong>Fighting hard, harpoons fly</strong></p>
-        <p><em>Aim for the brow, pierce the eye</em></p>
-        <p><strong>Muscles strain, blood will rain</strong></p>
-        <p><em>The whale will see defeat.</em></p>
-
+        <p>Regenerate health by picking up <a class="heal">heals</a>. Use upgrades to increase your <a class="damage">damage</a>.</p>
+        <p>Get your duplicate chance up and you might find something <a class="interest">interesting</a>.</p>
     </body>
 </html>
