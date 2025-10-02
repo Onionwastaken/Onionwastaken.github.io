@@ -1,5 +1,13 @@
 body {
     background-color: cadetblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: center;
 }
 @keyframes shift {
     0%  {color: red;}
@@ -23,4 +31,21 @@ body {
 }
 .interest{
     animation: shift infinite 3s;
+}
+p {
+    max-width: 750px;
+}
+.choices a{
+    background: rgb(76, 180, 145);
+    color: black;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.choices a:hover {
+    background: black;
+    color: aquamarine;
 }
