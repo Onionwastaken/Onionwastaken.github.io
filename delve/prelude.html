@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Delve
+        </title>
+    </head>
+    <body>
+        <style>
+            * {
+                background-color: gainsboro;
+            }
+        </style>
+        <script>
+            
+            // Store data
+            localStorage.setItem("username", "JohnDoe");
+            
+            // Retrieve data on another page
+            const username = localStorage.getItem("username");
+            console.log(username); // Output: JohnDoe
+            
+            function ask(message, _default="", hint="Please enter a valid response.") {
+                let response = prompt(message, _default)?.trim();
+                if (!response) {
+                    alert(hint);
+                    return ask(message);
+                }
+                return response;
+            }
+            alert("Right then. Registration.")
+            let name = ask("Name?");
+            alert(name + "... got it.")
+
+            let age = ask("Age?")
+            age = Number(age)
+            if (age >= 18 ) {
+                alert("Old enough.")
+                } else if (age >= 16){
+                    alert("A little young...")
+                } else if (age < 16){
+                    alert("...")
+                }
+            alert("You're set for a year-long tour on a diving crew.")
+            choice=ask("Sounds right?","yes")
+            if (choice === "yes" || 
+                choice === "Yes" || 
+                choice === "YES"
+            ) {
+                alert("Very good. You would do well to remember that.")
+                } else {
+                    alert("That's a shame.")
+                }
+            
+            alert("That just about settles it. Go on down to the dock. Your other crew members are at gate three.")
+
+            window.open("http://onionwastaken.github.io/delve/quest_begin.html")
+            
+        </script>
+        <h1>javascript</h1>
+        <p></p>
+    </body>
+</html>

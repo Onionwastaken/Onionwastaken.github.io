@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Delve
+        </title>
+    </head>
+    <body>
+        <style>
+            * {
+                background-color: gainsboro;
+            }
+        </style>
+        <script>
+            function ask(message, _default="", hint="Please enter a valid response.") {
+                let response = prompt(message, _default)?.trim();
+                if (!response) {
+                    alert(hint);
+                    return ask(message);
+                }
+                return response;
+            }
+            alert("Other capsules fall with you. Their bright brass shine contrasts the gloomy atmosphere of your destination.")
+            alert("The window fogs as the light of the sun fades. The window turns a ghastly shade of gray. Slowly, it becomes darker.")
+            alert("As the atmosphere thickens, your vessel slows, moving at a crawl by the time it hits the surface. Your landing is further cushioned by the soft, fuzzy ground.")
+            alert("The lights flicker on, and a red light flashes. Once. Twice. Three times. Green.")
+            alert("The door swings open, and the bell is flooded. As captain, you disembark first.")
+            alert("The ground is fuzzy, and you can't tell how far away it is. The feeling makes you nauseous, and you jump down from the top step to aleviate the issue as soon as possible.")
+            alert("The \"floor\" is akin to snow, if only visually. A thick, almost solid fog reaches up to your waist.")
+            alert("Dell chimes in, \"First time, captain? Surely not?\"")
+            alert("\"What a joke,\" Lyla adds, \"How are we supposed to rely on this guy?\"")
+            alert("You do your best to ignore the children's heckling.")
+            alert("Your transmitter hums with a soft static. \"The mark's just ahead of you. They'll only wait for so long, so pick up the pace.\"")
+            alert("You signal to the other three. Making your way through the fog only gets harder as the depth intensifies. Eventually, the fog gets up to your face.")
+            alert("You get a ping on your radar. Three native biosignatures, closing in fast. The ground shakes beneath your feet, as a pair of giant wirms erupt out of the fog.")
+            alert("\"Don't move! They hunt based on vibrationsA\"")
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Delve
+        </title>
+    </head>
+    <body>
+        <style>
+            * {
+                background-color:gainsboro
+            }
+        </style>
+        <h1></h1>
+        <p></p>
+        <script>
+             let inventory = [
+                "Sword",
+                "Shield",
+                "Reaper Cloth",
+                "Pokeball x10",
+                "Dirt",
+                "Dog Residue",
+                "Diamond Armor",
+                "Netherite Shovel",
+                "Flint and Steel",
+                "20 Cells",
+                "Large Zonaite Crystal",
+                "Lightbulb",
+                "Food Ticket",
+                "Lumafly Lantern",
+                "Faydown Cloak"]
+            for (let index = 0; index < inventory.length; index++) {
+                console.log(inventory[index])
+            }
+            function ask(message, _default="", hint="Please enter a valid response.") {
+                let response = prompt(message, _default)?.trim();
+                if (!response) {
+                    alert(hint);
+                    return ask(message);
+                }
+                return response;
+            }
+
+            alert("You find it hard to make space in the crowd. A mess of torsos and arms bump into you as you fight your way to dock three.")
+            alert("After shoving your way through the crowd, you meet up with the rest of your crew.")
+            alert("Of them, there are a scrawny old man and a pair of nearly identical twins.")
+            alert("Your crew is smaller than most, and the bell you were assigned seems to only confirm the worst.")
+            alert("You've been assigned to a cleaner squad.")
+            alert("The old man walks up to you and puts his hand out. His grasp is firm, and his hands are rough.\"Name's Oswald. I'll be your spotter.\"")
+            alert("He gives you a sideways glance as he turns around to introduce the others.")
+            alert("\"The twins are Lyla and Dell. Keep those two on a short leash.\"")
+            alert("\"Your job is simple. Follow after a kill squad and pick up anything they don't.\"")
+            alert("\"Or, in the case of total annhialation, search the dropzone for any company issue gear.\"")
+            let ready = ask("\"Got it?\"","","\"C'mon kid, it's a simple yes or no! Are you ready?\"")
+            if (ready === "yes"||
+                ready === "Yes"||
+                ready === "YES"){
+                    alert("The old man waves you off as he walks up the steps and behind the launch terminal.")
+                } else{
+                    alert("\"Well that's a damn shame.\"")
+                    alert("The old man waves you off as he walks up the steps and behind the launch terminal.")
+                }
+            alert("The work bell rings. You and the others step into the diving bell. Oswald gives you a somber look as the doors seal. \"Give 'em hell, kid.\"")
+            alert("Your suit keeps you grounded as you plunge down to the surface.")
+            window.open("http://onionwastaken.github.io/delve/landing1.html")
+        </script>
+    </body>
+</html>
