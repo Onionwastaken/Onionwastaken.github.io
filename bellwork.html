@@ -2,54 +2,68 @@
 <html>
     <head>
         <title>
-            bellwork
+            Spooky
         </title>
     </head>
     <body>
         <style>
             * {
-                background-color: cadetblue;
+                background-color: darkslateblue;
+            }
+            #spooky {
+                position: absolute;
+                transform-origin: center;
+                font-size: 25px;
+                top : 50%;
+                left: 10%;
+                background-color: antiquewhite;
+                border: 2px solid rgb(0, 0, 0);
+                border-radius: 1.5rem;
+                padding: 15px;
+                padding-left: 5px;
+                padding-right: 5px;
+                animation: sick 10s infinite ease , float 5s infinite linear;
+                
+            }
+            #scary {
+                position: absolute;
+                top: 35%;
+                left:40%;
+                transform-origin: center;
+                animation: wobble 5s infinite linear;
+
+            }
+            #kitty {
+                position: absolute;
+                top:90%
+            }
+            @keyframes sick {
+                0%  {transform: rotate(0deg);}
+                50% {transform: rotate(1080deg);}
+                100%{transform: rotate(0deg);}
+            }
+            @keyframes wobble {
+                0%  {transform: rotate(-15deg);}
+                25% {transform: rotate(0deg)  ;}
+                50% {transform: rotate(15deg) ;}
+                75% {transform: rotate(0deg)  ;}
+                100%{transform: rotate(-15deg);}
+            }
+            @keyframes float {
+                0%  {left: 10%;
+                     top : 10%;}
+                25% {left: 10%;
+                     top : 50%;}
+                50% {left: 90%;
+                     top : 90%;}
+                75% {left: 50%;
+                     top : 10%;}
+                100%{left: 10%;
+                     top : 10%;}
             }
         </style>
-        <script>
-            //REMEMBER NAME
-            //CONSOLE USER
-            //CHECK THE WEATHER
-            //CHECK THE TIME
-            let username = ""
-            function ask(message, _default="", hint="Please enter a valid response.") {
-                let response = prompt(message, _default)?.trim();
-                if (!response) {
-                    alert(hint);
-                    return ask(message);
-                }
-                return response;
-            }
-            while (!username){
-                username = ask("I've never seen you around. What's your name?","","Could you repeat that? I... didn't quite understand.")
-            }
-
-            alert("It's nice to meet you, " + username + "!")
-            while (true){
-                let request = ""
-                request = ask("How can I help you today?")
-            
-                if (request.includes("name")){
-                    name = ask("Did I get your name wrong? I'm sorry.")
-                }
-                if (request.includes("weather")){
-                    alert("I'm not too sure. There's no windows where I live.")
-                }
-                if (request.includes("time")){
-                    let time = new Date().toTimeString()
-                    alert("Let me check my phone really quick. The time is currently "+time)
-                }
-
-                if (request.includes("date")){
-                    let date = new Date().toDateString()
-                    alert("You want to what? Oh! Um, sorry. The date is "+date)
-                }
-            }
-        </script>
+        <img src="assets/images/spookyJackolantern.gif" alt="spookyJackolantern" id="scary">
+        <img src="assets/images/kitty.png" alt="kitty" id="kitty">
+        <div id="spooky">(◎﹏◎)</div>
     </body>
 </html>
