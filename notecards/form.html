@@ -1,11 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="cards.css">
         <title>Contact</title>
     </head>
     <body>
         <h1 class="container">Contact Info</h1><br>
+
+        <button>Dark/Light</button>
+        <style>
+            button {
+                background: white;
+                color: black;
+                border-radius: 1rem;
+                border: solid 1px black;
+                outline: none;
+            }
+
+            button:hover {
+                background: black;
+                color: white;
+                border-radius: 1rem;
+                border: solid 1px black;
+                outline: none;
+            }
+            
+            .dark body {
+                background: black;
+                color: white;
+            }
+
+            .dark button {
+                background: black;
+                color: white;
+                border-radius: 1rem;
+                border: solid 1px white;
+                outline: none;
+            }
+
+            .dark button:hover {
+                background: white;
+                color: black;
+                border-radius: 1rem;
+                border: solid 1px white;
+                outline: none;
+            }
+            
+            
+        </style>
+
+        <script>
+
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", toggleDarkMode)
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle("dark");
+        }
+
+        </script>
 
         <div class="link"><a href="https://github.com/Onionwastaken">Github</a></div><br>
 

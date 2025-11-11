@@ -2,68 +2,77 @@
 <html>
     <head>
         <title>
-            Spooky
-        </title>
+            Nothing this week
+          </title>
     </head>
     <body>
-        <style>
-            * {
-                background-color: darkslateblue;
-            }
-            #spooky {
-                position: absolute;
-                transform-origin: center;
-                font-size: 25px;
-                top : 50%;
-                left: 10%;
-                background-color: antiquewhite;
-                border: 2px solid rgb(0, 0, 0);
-                border-radius: 1.5rem;
-                padding: 15px;
-                padding-left: 5px;
-                padding-right: 5px;
-                animation: sick 10s infinite ease , float 5s infinite linear;
-                
-            }
-            #scary {
-                position: absolute;
-                top: 35%;
-                left:40%;
-                transform-origin: center;
-                animation: wobble 5s infinite linear;
+        <div id = "pablo"><img src="assets/images/pablo_idle.png"></img></div>
+        <img src="assets/images/ancient_aspid.png">
+    <script>
+        const pablo = document.getElementById("pablo")
+        pablo.style.position = "absolute"
+        pablo.style.top      = "50%"
+        pablo.style.left     = "10px"
+        const dom = document.querySelector("*")  
+      document.addEventListener("keydown", onKeyDown)
+      document.addEventListener("keyup"  , onKeyUp  )
+        dom.style.backgroundImage = "url('assets/images/screenwipe.gif')"
+      let x  = 0
+      let y  = 0
 
-            }
-            #kitty {
-                position: absolute;
-                top:90%
-            }
-            @keyframes sick {
-                0%  {transform: rotate(0deg);}
-                50% {transform: rotate(1080deg);}
-                100%{transform: rotate(0deg);}
-            }
-            @keyframes wobble {
-                0%  {transform: rotate(-15deg);}
-                25% {transform: rotate(0deg)  ;}
-                50% {transform: rotate(15deg) ;}
-                75% {transform: rotate(0deg)  ;}
-                100%{transform: rotate(-15deg);}
-            }
-            @keyframes float {
-                0%  {left: 10%;
-                     top : 10%;}
-                25% {left: 10%;
-                     top : 50%;}
-                50% {left: 90%;
-                     top : 90%;}
-                75% {left: 50%;
-                     top : 10%;}
-                100%{left: 10%;
-                     top : 10%;}
-            }
-        </style>
-        <img src="assets/images/spookyJackolantern.gif" alt="spookyJackolantern" id="scary">
-        <img src="assets/images/kitty.png" alt="kitty" id="kitty">
-        <div id="spooky">(◎﹏◎)</div>
+      let keys = { }
+
+      function onKeyDown(ke) {
+        keys[ke.key] = true
+      }
+
+      function onKeyUp(ke) {
+        keys[ke.key] = false
+      }
+
+      function isKeyDown(key) {
+        return keys[key] ?? false
+      }
+
+      function isKeyUp(key) {
+        return !(keys[key] ?? false)
+      }
+
+      function update(t, dt) {
+        if (isKeyDown("w"))
+          y = y - 300 * dt
+
+        if (isKeyDown("s"))
+          y = y + 300 * dt
+
+        if (isKeyDown("a"))
+          x = x - 300 * dt
+
+        if (isKeyDown("d"))
+          x = x + 300 * dt
+        
+      }
+
+      function render(t, dt) {
+        pablo.style.left = x + "px"
+        pablo.style.top  = y + "px"
+      }
+
+      function animate(t0, t1, t2) {
+        const t  = (t2 - t0) / 1000
+        const dt = (t2 - t1) / 1000
+        update(t, dt)
+        render(t, dt)
+        
+        requestAnimationFrame(t3 => animate(t0, t2, t3))
+      }
+
+      requestAnimationFrame(
+        t0 => requestAnimationFrame(
+          t1 => requestAnimationFrame(
+            t2 => animate(t0, t1, t2))))
+
+
+    </script>
     </body>
 </html>
