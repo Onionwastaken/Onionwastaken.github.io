@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+    <style>
+      * {
+        inset: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width : 100dvw;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .board {
+        display: grid;
+        width : fit-content;
+        height: fit-content;
+        grid-template-columns: 1fr 1fr 1fr;
+        border: black 2px solid;
+        box-shadow: black 8px 8px;
+      }
+
+      .board>a {
+        width : 100px;
+        height: 100px;
+        border: black 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 70px;
+        font-family: sans-serif;
+        font-weight: bold;
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .x {
+        color: black;
+        cursor: default;
+        font-weight: bold;
+      }
+
+      .o {
+        color: black;
+        cursor: default;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-family: sans-serif;
+        font-size: 32px;
+      }
+
+      #info {
+        font-family: sans-serif;
+        font-size: 18px;
+        margin-top: 12px;
+      }
+    </style>
+
+    <div class="container">
+      <h1>Tic-Tac-Toe</h1>
+      <div class="board">
+        <a id="a1"></a>
+        <a id="a2"></a>
+        <a id="a3"></a>
+        <a id="b1"></a>
+        <a id="b2"></a>
+        <a id="b3"></a>
+        <a id="c1"></a>
+        <a id="c2"></a>
+        <a id="c3"></a>
+      </div>
+      <span id="info"><span class="x">Player 1</span>, click on an empty cell to place an <span class="x">X</span></span>
+    </div>
+
+    <script>
+      const info = document.getElementById("info")
+
+      const a1 = document.getElementById("a1")
+      const a2 = document.getElementById("a2")
+      const a3 = document.getElementById("a3")
+
+      const b1 = document.getElementById("b1")
+      const b2 = document.getElementById("b2")
+      const b3 = document.getElementById("b3")
+
+      const c1 = document.getElementById("c1")
+      const c2 = document.getElementById("c2")
+      const c3 = document.getElementById("c3")
+
+      let turn = 0
+
+      function onClick(e) {
+        if (turn < 0 || e.target.classList.length > 0)
+          return;
+
+        // turn is odd
+        if (turn & 1) {
+          e.target.innerHTML = "X"
+          e.target.classList.remove("x")
+          e.target.classList.add   ("o")
+          info.innerHTML = "<span class='x'>Player 1</span>, click on an empty cell to place an <span class='x'>X</span>"
+        } else {
+          e.target.innerHTML = "X"
+          e.target.classList.remove("o")
+          e.target.classList.add   ("x")
+          info.innerHTML = "<span class='o'>Player 2</span>, click on an empty cell to place an <span class='o'>X</span>"
+        }
+
+        turn += 1
+
+        // check rows
+        check(a1, a2, a3)
+        check(b1, b2, b3)
+        check(c1, c2, c3)
+
+        // check columns
+        check(a1, b1, c1)
+        check(a2, b2, c2)
+        check(a3, b3, c3)
+
+        // check diagnols
+        check(a1, b2, c3)
+        check(a3, b2, c1)
+      }
+
+      function check(a, b, c) {
+        if (
+          a.innerText !== "" &&
+          a.innerText === b.innerText &&
+          b.innerText === c.innerText
+        ) {
+          if (turn & 1) {
+            info.innerHTML = "<span class='x'>Player 2</span> Wins!"
+            a.innerHTML = "🤞"
+            b.innerHTML = "🤞"
+            c.innerHTML = "🤞"
+          } else {
+            info.innerHTML = "<span class='o'>Player 1</span> Wins!"
+            a.innerHTML = "👌"
+            b.innerHTML = "👌"
+            c.innerHTML = "👌"
+          }
+          turn = -1
+        }
+      }
+
+      a1.onclick = onClick
+      a2.onclick = onClick
+      a3.onclick = onClick
+      b1.onclick = onClick
+      b2.onclick = onClick
+      b3.onclick = onClick
+      c1.onclick = onClick
+      c2.onclick = onClick
+      c3.onclick = onClick
+
+    </script>
+
+  </body>
+</html>
+index.html
+Displaying index.html.
