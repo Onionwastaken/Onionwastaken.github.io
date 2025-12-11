@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            trash class, absolute booty buns
+        </title>
+    </head>
+    <body class="bod">
+        <style>
+            .bod {
+                background-image: url(assets/images/snow.gif);
+            }
+            .letter {
+                display: none;
+            }
+            .text{
+                background-color: rgb(135, 222, 218);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-weight: 400;
+                font-style: normal;
+                justify-content:center;
+                border: 2px solid rgb(92, 94, 197);
+                border-radius: 1.5rem;
+                padding-left: 5px;
+                padding-right: 5px;
+                width:fit-content;
+            }
+            .sticks {
+                cursor: pointer;
+                width: fit-content;
+            }
+
+            .sticks:hover .unlit {
+                display: none;
+            }
+            .sticks:active .unlit {
+                display: none;
+            }
+
+
+            .sticks:hover .sparking {
+                display: block;
+            }
+            .sticks:active .sparking{
+                display: none;
+            }            
+            .sticks .sparking {
+                display: none;
+            }
+
+            .sticks:active .lit {
+                display: block;
+            }            
+            .sticks .lit {
+                display: none;
+            }
+
+            img {
+                image-rendering: pixelated;
+            }
+
+            .fire.sticks .unlit{
+                display: none;
+            }
+            .fire.sticks .sparking{
+                display: none;
+            }
+
+            .fire.sticks .lit{
+                display: block;
+            }
+        </style>
+        <h1 class="text">The wind blows strong.</h1>
+        <p class="text">Perhaps with some sticks you could build a fire.</p>
+        <div class="sticks">
+            <img src="assets/images/sticks_unlit.png" width="200px" class="unlit" >
+            <img src="assets/images/sticks_sparking.png" width="200px" class="sparking">
+            <img src="assets/images/sticks_lit.png" width="200px" class="lit"   >
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="letter">
+            <p>Dear Santa,</p>
+            
+            <p>I haven't been the greatest this year. I'm working on it, y'know?</p>
+            <p>I know im not in the greatest position to ask, but if you were to</p>
+            <p>bring me anything this year, it'd have to be some sandpaper. I'd settle</p>
+            <p>for some pepsi, or some new underwear though.</p>
+            <p>-Onion</p>
+        </div><script>
+            const sticks = document.querySelector('.sticks')
+            sticks.addEventListener("click", onClick)
+            function onClick(){
+                document.querySelector('.bod').style.background = "green";
+                document.querySelector('.letter').style.display = "block";
+                sticks.classList.toggle("fire")
+                
+            }
+        </script>
+    </body>
+</html>

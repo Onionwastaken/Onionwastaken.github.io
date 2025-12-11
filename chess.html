@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Chess
+        </title>
+    </head>
+    <body>
+        <style>
+            * {
+                background-color: cornsilk;
+            }
+        </style>
+        <div id = "board"></div>
+
+        <script>
+            const board = document.getElementById("board");
+
+            board.style.display = "grid"
+            board.style.gridTemplateColumns = "repeat(8, 1fr)"
+            board.style.width = "fit-content"
+            board.style.height = "fit-content"
+            function Square(file, rank){
+                const square = document.createElement("div")
+                square.style.width= "72px";
+                square.style.height= "72px";
+                square.style.border= "1px solid black";
+                square.setAttribute("data-file" , file)
+                square.setAttribute("data-rank" , rank)
+
+                if ((file + rank) & 1 ){
+                    square.style.background ="#fff"
+                } else {
+                    square.style.background ="#000" 
+                }
+                square.appendChild(Piece())
+                return square
+            }
+            for (let rank = 7; rank > -1; rank --)
+                for (let file = 0; file < 8; file ++)
+                    board.appendChild(Square(file, rank))
+
+            function Piece(){
+                const piece = document.createElement("div")
+                piece.style.width = "72px"
+                piece.style.height = "72px"
+                piece.style.cursor = "move"
+                piece.style.userSelect = "none"
+            }
+        </script>
+    </body>
+</html>

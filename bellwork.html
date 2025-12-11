@@ -1,179 +1,80 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>Pilgrim Grid Demo</title>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 18px; }
-    #controls { display: flex; gap: 12px; align-items: center; }
-    #gridWrap { position: relative; }
-    #grid { display: grid; position: relative; }
-    .cell { box-sizing: border-box; border: 1px solid #ddd; }
-    #pathCanvas { position: absolute; top: 0; left: 0; pointer-events: none; }
-    #info { font-size: 16px; }
-    button { padding: 6px 10px; font-size: 14px; }
-  </style>
+  <title>Winter scene</title>
 </head>
 <body>
-  <div id="controls">
-    <label>Grid Size: <input id="sizeSlider" type="range" min="2" max="8" value="5" /></label>
-    <span id="sizeLabel">5</span>
-    <button id="reset">Reset</button>
+  <style>
+    .bezel {
+      display: block;
+      width: 100%;
+      position: relative;
+    }
+    .bezel::after{
+      display: block;
+      padding-top: 56.25%;
+      content: '';
+    }
+    #screen{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: black;
+    }
+    @keyframes flutter1 {
+      0%  {color: aqua;
+           left : 0px;
+           top  : 0px;}
+      25% {color: aquamarine;
+           left : 0px;
+           top  : 200px;}
+      50% {color: cadetblue;
+           left : 330px;
+           top  : 400px;}
+      75% {color: cornflowerblue;
+           left : 20px;
+           top  : 600px;}
+      100%{color: cyan;
+           left : 200px;
+           top  : 800px;}
+    }
+    .snowflake1 {
+      position: absolute;
+      font-size: 75px;
+      animation: flutter 5s linear infinite;
+      
+    }
+    @keyframes flutter2 {
+      0%  {color: aqua;
+           left : 750px;
+           top  : 0px;}
+      25% {color: aquamarine;
+           left : 600px;
+           top  : 200px;}
+      50% {color: cadetblue;
+           left : 330px;
+           top  : 400px;}
+      75% {color: cornflowerblue;
+           left : 20px;
+           top  : 600px;}
+      100%{color: cyan;
+           left : 200px;
+           top  : 800px;}
+    }
+    .snowflake2 {
+      position: absolute;
+      font-size: 75px;
+      animation: flutter 5s linear infinite;
+      
+    }
+</style>
+<div class="bezel">
+  <div id="screen">
+    <div class="snowflake1">*</div>
+    <div class="snowflake2">*</div>
   </div>
-  <div id="info">Tax: $0</div>
-
-  <div id="gridWrap">
-    <div id="grid"></div>
-    <!-- canvas will be added dynamically -->
-  </div>
-
-  <script>
-    // Config
-    let gridSize = 5;
-    const cellSize = 60; // px
-
-    // DOM
-    const gridWrap = document.getElementById('gridWrap');
-    const gridEl = document.getElementById('grid');
-    const infoEl = document.getElementById('info');
-    const resetBtn = document.getElementById('reset');
-    const sizeSlider = document.getElementById('sizeSlider');
-    const sizeLabel = document.getElementById('sizeLabel');
-
-    // Canvas for drawing path
-    const canvas = document.createElement('canvas');
-    canvas.id = 'pathCanvas';
-    const ctx = canvas.getContext('2d');
-
-    // Pilgrim state
-    const pilgrim = {
-      x: 0,
-      y: 0,
-      tax: 0,
-      paths: new Set(), // stores "x1,y1->x2,y2"
-    };
-
-    function pathKey(x1, y1, x2, y2) {
-      return `${x1},${y1}->${x2},${y2}`;
-    }
-
-    function buildGrid() {
-      // size label
-      sizeLabel.textContent = gridSize;
-
-      // clear grid
-      gridEl.innerHTML = '';
-
-      // set grid css
-      gridEl.style.gridTemplateColumns = `repeat(${gridSize}, ${cellSize}px)`;
-      gridEl.style.gridTemplateRows = `repeat(${gridSize}, ${cellSize}px)`;
-
-      // create cells
-      for (let i = 0; i < gridSize * gridSize; i++) {
-        const d = document.createElement('div');
-        d.className = 'cell';
-        d.style.width = `${cellSize}px`;
-        d.style.height = `${cellSize}px`;
-        gridEl.appendChild(d);
-      }
-
-      // size canvas and place it on top
-      canvas.width = gridSize * cellSize;
-      canvas.height = gridSize * cellSize;
-      canvas.style.width = canvas.width + 'px';
-      canvas.style.height = canvas.height + 'px';
-
-      // ensure canvas is inside gridWrap and above grid
-      if (!canvas.parentElement || canvas.parentElement !== gridWrap) {
-        gridWrap.appendChild(canvas);
-      }
-    }
-
-    function reset() {
-      pilgrim.x = 0;
-      pilgrim.y = 0;
-      pilgrim.tax = 0;
-      pilgrim.paths = new Set();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      draw();
-    }
-
-    function move(dx, dy) {
-      const nx = pilgrim.x + dx;
-      const ny = pilgrim.y + dy;
-      // bounds
-      if (nx < 0 || nx >= gridSize || ny < 0 || ny >= gridSize) return;
-
-      const k = pathKey(pilgrim.x, pilgrim.y, nx, ny);
-      const kRev = pathKey(nx, ny, pilgrim.x, pilgrim.y);
-      // cannot retread the same path (either direction)
-      if (pilgrim.paths.has(k) || pilgrim.paths.has(kRev)) return;
-
-      // apply taxes
-      if (dx === 1) pilgrim.tax += 2;    // east +2
-      if (dx === -1) pilgrim.tax -= 2;   // west -2
-      if (dy === 1) pilgrim.tax *= 2;    // south double
-      if (dy === -1) pilgrim.tax /= 2;   // north double
-
-      // record path and draw segment
-      pilgrim.paths.add(k);
-      drawSegment(pilgrim.x, pilgrim.y, nx, ny);
-
-      pilgrim.x = nx;
-      pilgrim.y = ny;
-      draw();
-    }
-
-    function drawSegment(x1, y1, x2, y2) {
-      const half = cellSize / 2;
-      ctx.lineWidth = 6;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(x1 * cellSize + half, y1 * cellSize + half);
-      ctx.lineTo(x2 * cellSize + half, y2 * cellSize + half);
-      ctx.stroke();
-    }
-
-    function draw() {
-      // update info
-      infoEl.textContent = `Tax: $${pilgrim.tax}`;
-
-      // color cells and show pilgrim
-      const children = Array.from(gridEl.children);
-      children.forEach((c, i) => {
-        const x = i % gridSize;
-        const y = Math.floor(i / gridSize);
-        if (x === pilgrim.x && y === pilgrim.y) {
-          c.style.background = '#dff0ff';
-        } else {
-          c.style.background = 'white';
-        }
-      });
-    }
-
-    // keyboard controls
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') move(1, 0);
-      else if (e.key === 'ArrowLeft') move(-1, 0);
-      else if (e.key === 'ArrowDown') move(0, 1);
-      else if (e.key === 'ArrowUp') move(0, -1);
-    });
-
-    // UI handlers
-    resetBtn.addEventListener('click', reset);
-
-    sizeSlider.addEventListener('input', () => {
-      const val = parseInt(sizeSlider.value, 10);
-      if (Number.isFinite(val)) {
-        gridSize = val;
-        buildGrid();
-        reset();
-      }
-    });
-
-    // initial build
-    buildGrid();
-    reset();
-  </script>
+</div>
 </body>
 </html>
