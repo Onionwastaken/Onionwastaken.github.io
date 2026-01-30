@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+  </head>
+  <body>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        display: flex;
+        min-height: 100dvh;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #calculator {
+        display: grid;
+        width : fit-content;
+        height: fit-content;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .15rem;
+      }
+
+      #calculator * {
+        width : 4rem;
+        height: 4rem;
+        font: 2rem monospace;
+
+        border-radius: .5rem;
+      }
+
+      #calculator button:hover {
+        background: lightblue;
+      }
+
+      #calculator #display {
+        grid-area: 1 / 1 / 1 / 5;
+        padding: .25rem;
+        text-align: right;
+        width: 100%;
+        box-sizing: border-box;
+        background: lightblue;
+        border: 2px solid black;
+        white-space: pre-wrap;
+      }
+
+
+      #calculator #go {
+        grid-column-start: 4;
+        grid-row-start: 4;
+        grid-row-end  : 6;
+        width : 100%;
+        height: 100%;
+      }
+    </style>
+
+    <div id="calculator">
+      <div id="display">.</div>
+
+      <button id="7">7</button>
+      <button id="8">8</button>
+      <button id="9">9</button>
+      <button id="sub">-</button>
+
+      <button id="4">4</button>
+      <button id="5">5</button>
+      <button id="6">6</button>
+      <button id="add">+</button>
+
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="go">=</button>
+
+      <button id="c">C</button>
+      <button id="0">0</button>
+      <button id="dot">.</button>
+    </div>
+
+    <script>
+      const display = document.getElementById("display")
+      
+      const _0 = document.getElementById("0")
+      const _1 = document.getElementById("1")
+      const _2 = document.getElementById("2")
+      const _3 = document.getElementById("3")
+      const _4 = document.getElementById("4")
+      const _5 = document.getElementById("5")
+      const _6 = document.getElementById("6")
+      const _7 = document.getElementById("7")
+      const _8 = document.getElementById("8")
+      const _9 = document.getElementById("9")
+
+      const add = document.getElementById("add")
+      const sub = document.getElementById("sub")
+      const dot = document.getElementById("dot")
+      const go  = document.getElementById("go" )
+      const c   = document.getElementById("c"  )
+      
+      function fix(){
+        const nums = display.innerText.split(" ")
+
+        for (let index = 0; index < nums.length; index++) {
+          if (nums[index] == "+"){
+            nums[index] = parseFloat(nums[index - 1]) + parseFloat(nums[index + 1])
+            nums.splice(index + 1, 1)
+            nums.splice(index - 1, 1)
+            index --
+          } else if (nums[index] == "-"){
+            nums[index] = parseFloat(nums[index - 1]) - parseFloat(nums[index + 1])
+            nums.splice(index + 1, 1)
+            nums.splice(index - 1, 1)
+            index --
+          }
+        }
+        return nums[0]
+      }
+
+      c.onclick = ()  => display.innerText = ""
+      _0.onclick = () => display.innerText = display.innerText + "0"
+      _1.onclick = () => display.innerText = display.innerText + "1"
+      _2.onclick = () => display.innerText = display.innerText + "2"
+      _3.onclick = () => display.innerText = display.innerText + "3"
+      _4.onclick = () => display.innerText = display.innerText + "4"
+      _5.onclick = () => display.innerText = display.innerText + "5"
+      _6.onclick = () => display.innerText = display.innerText + "6"
+      _7.onclick = () => display.innerText = display.innerText + "7"
+      _8.onclick = () => display.innerText = display.innerText + "8"
+      _9.onclick = () => display.innerText = display.innerText + "9"
+ 
+      add.onclick = () => display.innerText = display.innerText + " + "
+      sub.onclick = () => display.innerText = display.innerText + " - "
+      dot.onclick = () => display.innerText = display.innerText + "."
+      go.onclick = () => display.innerText = fix()
+
+
+    </script>
+  </body>
+</html> 
