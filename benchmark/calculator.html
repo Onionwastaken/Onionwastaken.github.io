@@ -59,7 +59,7 @@
       }
     </style>
 
-    <div id="calculator">
+    <div id="calculator"> <!--Calculator Buttons-->
       <div id="display">.</div>
 
       <button id="7">7</button>
@@ -83,7 +83,7 @@
     </div>
 
     <script>
-      const display = document.getElementById("display")
+      const display = document.getElementById("display")//Declares buttons as variables
       
       const _0 = document.getElementById("0")
       const _1 = document.getElementById("1")
@@ -102,25 +102,36 @@
       const go  = document.getElementById("go" )
       const c   = document.getElementById("c"  )
       
+
+      //Solve function
       function fix(){
+        //establishes arguments and operators within the display
         const nums = display.innerText.split(" ")
 
+        //for loop runs until only one value remains
         for (let index = 0; index < nums.length; index++) {
           if (nums[index] == "+"){
+            //adds together the numbers, then replaces the "+" with the product
             nums[index] = parseFloat(nums[index - 1]) + parseFloat(nums[index + 1])
+            //removes the used numbers
             nums.splice(index + 1, 1)
             nums.splice(index - 1, 1)
+            //fixes index number
             index --
           } else if (nums[index] == "-"){
+            //subtracts numbers and sets "-" value to difference
             nums[index] = parseFloat(nums[index - 1]) - parseFloat(nums[index + 1])
+            //removes used numbers
             nums.splice(index + 1, 1)
             nums.splice(index - 1, 1)
+            //fixes index number
             index --
           }
         }
+        //returns value to display
         return nums[0]
       }
-
+      //defines what actions to take when buttons are clicked
       c.onclick = ()  => display.innerText = ""
       _0.onclick = () => display.innerText = display.innerText + "0"
       _1.onclick = () => display.innerText = display.innerText + "1"
