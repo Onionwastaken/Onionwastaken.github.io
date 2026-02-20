@@ -25,7 +25,13 @@
           todo.removeChild(li)
         }
 
-        cb.onmouseup = deleteItem
+        function strikeThrough(){
+          text.style.textDecoration = "line-through"
+        }
+        
+        text.onclick = strikeThrough
+
+        cb.onchange = deleteItem
         
         cb.type = "checkbox"
         text.innerText = desc
